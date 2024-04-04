@@ -3,31 +3,72 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0; /* Black text */
+  --background-rgb: 239, 246, 255; /* Light blue background */
+  --accent-color-rgb: 59, 130, 246; /* Blue accent color */
+  --form-background-rgb: 255, 255, 255; /* White form background */
+  --border-radius: 0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 255, 255, 255; /* White text */
+    --background-rgb: 29, 78, 216; /* Dark blue background */
+    --accent-color-rgb: 191, 219, 254; /* Light blue accent */
+    --form-background-rgb: 59, 130, 246; /* Blue form background */
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: rgb(var(--background-rgb));
+  height: 100%; /* Make sure the body takes up full viewport height */
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
 }
+
+.form-container {
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  background-color: rgb(var(--form-background-rgb));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Simple shadow for depth */
+  max-width: 400px; /* Maximum width of the form container */
+  width: 100%; /* Make it responsive */
+  margin: 1rem;
+}
+
+input[type="text"],
+input[type="file"],
+button {
+  width: 100%; /* Full width of the parent container */
+  padding: 0.75rem; /* Padding for input fields and button */
+  margin: 0.5rem 0; /* Margin for spacing out elements */
+  border-radius: 0.25rem; /* Slightly rounded corners for input fields and button */
+  border: 1px solid #ccc; /* Border for inputs */
+}
+
+button {
+  background-color: rgb(var(--accent-color-rgb));
+  color: white; /* White text for button */
+  border: none; /* No border for button */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: rgba(var(--accent-color-rgb), 0.85); /* Slightly lighter on hover */
+}
+
+label {
+  color: rgb(var(--foreground-rgb)); /* Black label color */
+  display: block; /* Make label display as block for better layout */
+}
+
+/* Add any additional styles as necessary */
