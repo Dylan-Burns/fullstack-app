@@ -3,72 +3,93 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0; /* Black text */
-  --background-rgb: 239, 246, 255; /* Light blue background */
-  --accent-color-rgb: 59, 130, 246; /* Blue accent color */
+  --foreground-rgb: 17, 24, 39; /* Dark blue-grey text */
+  --background-rgb: 255, 255, 255; /* White background */
+  --accent-color-rgb: 37, 99, 235; /* Blue for accents */
   --form-background-rgb: 255, 255, 255; /* White form background */
-  --border-radius: 0.5rem;
+  --border-radius: 0.5rem; /* Rounded corners for elements */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255; /* White text */
-    --background-rgb: 29, 78, 216; /* Dark blue background */
-    --accent-color-rgb: 191, 219, 254; /* Light blue accent */
-    --form-background-rgb: 59, 130, 246; /* Blue form background */
+    --foreground-rgb: 255, 255, 255; /* White text for dark mode */
+    --background-rgb: 17, 24, 39; /* Dark background for dark mode */
+    --accent-color-rgb: 59, 130, 246; /* Lighter blue for accents in dark mode */
+    --form-background-rgb: 31, 41, 55; /* Darker form background in dark mode */
   }
 }
 
 html, body {
   padding: 0;
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: rgb(var(--background-rgb));
-  height: 100%; /* Make sure the body takes up full viewport height */
+  font-family: 'SF Pro', sans-serif;
 }
 
 #container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
+  min-height: 100vh; /* Full viewport height */
+  background-color: rgb(var(--background-rgb));
 }
 
 .form-container {
-  padding: 2rem;
+  padding: 1rem;
   border-radius: var(--border-radius);
   background-color: rgb(var(--form-background-rgb));
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Simple shadow for depth */
-  max-width: 400px; /* Maximum width of the form container */
-  width: 100%; /* Make it responsive */
+  box-shadow: 0 15px 15px -1px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
   margin: 1rem;
 }
 
 input[type="text"],
-input[type="file"],
 button {
-  width: 100%; /* Full width of the parent container */
-  padding: 0.75rem; /* Padding for input fields and button */
-  margin: 0.5rem 0; /* Margin for spacing out elements */
-  border-radius: 0.25rem; /* Slightly rounded corners for input fields and button */
-  border: 1px solid #ccc; /* Border for inputs */
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: var(--border-radius);
+  border: 2px solid rgba(229, 231, 235); /* Light gray border */
 }
 
 button {
   background-color: rgb(var(--accent-color-rgb));
-  color: white; /* White text for button */
-  border: none; /* No border for button */
-  cursor: pointer;
-  transition: background-color 0.3s;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 button:hover {
-  background-color: rgba(var(--accent-color-rgb), 0.85); /* Slightly lighter on hover */
+  background-color: rgba(var(--accent-color-rgb), 0.9);
 }
 
 label {
-  color: rgb(var(--foreground-rgb)); /* Black label color */
-  display: block; /* Make label display as block for better layout */
+  margin-top: 1rem;
+  color: rgb(var(--foreground-rgb));
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-/* Add any additional styles as necessary */
+.webcam-container {
+  position: relative;
+  width: 100%;
+  margin: 1rem 0; /* Spacing above and below webcam */
+}
+
+.webcam-screenshot {
+  width: 100%;
+  border-radius: var(--border-radius);
+  margin-top: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .form-container {
+    width: 90%; /* More responsive on small screens */
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
