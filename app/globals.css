@@ -3,25 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 17, 24, 39; /* Dark blue-grey text */
-  --background-rgb: 255, 255, 255; /* White background */
-  --accent-color-rgb: 37, 99, 235; /* Blue for accents */
-  --form-background-rgb: 255, 255, 255; /* White form background */
-  --border-radius: 0.5rem; /* Rounded corners for elements */
-  /* Define dark mode variables */
-  --dark-foreground-rgb: 255, 255, 255; /* White text for dark mode */
-  --dark-background-rgb: 17, 24, 39; /* Dark background for dark mode */
-  --dark-accent-color-rgb: 59, 130, 246; /* Lighter blue for accents in dark mode */
-  --dark-form-background-rgb: 31, 41, 55; /* Darker form background in dark mode */
+  /* Primary color variables used throughout the application */
+  --foreground-rgb: 17, 24, 39; /* Primary text color */
+  --background-rgb: 255, 255, 255; /* Primary background color */
+  --accent-color-rgb: 37, 99, 235; /* Accent color for buttons and icons */
+  --form-background-rgb: 255, 255, 255; /* Background for form elements */
+  --border-radius: 0.5rem; /* Standard border radius for rounded elements */
+  /* Dark mode color variables */
+  --dark-foreground-rgb: 255, 255, 255; /* Text color for dark mode */
+  --dark-background-rgb: 17, 24, 39; /* Background color for dark mode */
+  --dark-accent-color-rgb: 59, 130, 246; /* Accent color for dark mode */
+  --dark-form-background-rgb: 31, 41, 55; /* Form background color for dark mode */
 }
 
-/* Apply dark mode variables */
+/* Dynamic color assignment based on class for dark mode support */
 .dark {
   --foreground-rgb: var(--dark-foreground-rgb);
   --background-rgb: var(--dark-background-rgb);
   --accent-color-rgb: var(--dark-accent-color-rgb);
   --form-background-rgb: var(--dark-form-background-rgb);
 }
+
+/* ... the rest of the styles ... */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -66,7 +69,6 @@ input[type="text"], button {
   border: 2px solid rgba(229, 231, 235);
 }
 
-
 button {
   background-color: rgb(var(--accent-color-rgb));
   color: white;
@@ -107,7 +109,6 @@ label {
   }
 }
 
-
 .toggle-camera-btn {
   background-color: rgba(var(--foreground-rgb), 0.1); /* Slightly transparent */
   color: rgb(var(--foreground-rgb));
@@ -118,12 +119,13 @@ label {
 .toggle-camera-btn:hover {
   background-color: rgba(var(--foreground-rgb), 0.2); /* Darker on hover */
 }
-/* Toggle Switch Styles */
+
+/* Dark/Light Mode Toggle Switch Styles */
 .switch-container {
   display: inline-block;
   position: relative;
   margin: 1rem;
-  font-size: 14px; /* Adjust as needed */
+  font-size: 14px;
 }
 
 .switch-input {
@@ -134,16 +136,15 @@ label {
 
 .switch-label {
   cursor: pointer;
-  width: 80px; /* Adjusted width to fit 'Dark'/'Light' text */
-  height: 34px; /* Adjust height for aesthetic */
+  width: 80px;
+  height: 34px;
   background: grey;
-  display: block;
   border-radius: 50px;
   position: relative;
   transition: background-color 0.3s ease-in-out;
   display: flex;
-  justify-content: space-between; /* Arrange 'Dark'/'Light' at the ends */
-  align-items: center; /* Vertically center 'Dark'/'Light' text */
+  justify-content: space-between;
+  align-items: center;
   padding: 0 10px;
 }
 
@@ -153,7 +154,7 @@ label {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 30px; /* Circle size */
+  width: 30px;
   height: 30px;
   background: #fff;
   border-radius: 50%;
@@ -185,7 +186,7 @@ label {
 }
 
 .switch-input:checked + .switch-label:before {
-  left: calc(100% - 2px - 30px); /* Move to the right */
+  left: calc(100% - 2px - 30px);
   transition: 0.3s ease-in-out;
 }
 
@@ -199,5 +200,5 @@ label {
 }
 
 .switch-label:active:before {
-  width: 35px; /* Makes the circle a bit wider on click */
+  width: 35px;
 }
