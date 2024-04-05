@@ -8,15 +8,15 @@ if (!MONGODB_URI) {
 }
 
 async function connectToDatabase(): Promise<{ client: MongoClient; db: Db }> {
-    if ((global as any)._mongoClientPromise) { // Adding type assertion
-        return (global as any)._mongoClientPromise; // Adding type assertion
+    if ((global as any)._mongoClientPromise) { 
+        return (global as any)._mongoClientPromise; 
     }
 
     const client = new MongoClient(MONGODB_URI);
     (global as any)._mongoClientPromise = client.connect().then((client): { client: MongoClient; db: Db } => {
         return { client, db: client.db() };
     });
-    return (global as any)._mongoClientPromise; // Adding type assertion
+    return (global as any)._mongoClientPromise;
 }
 
 export default connectToDatabase;

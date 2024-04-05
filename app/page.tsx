@@ -64,7 +64,7 @@ const Page = () => {
                 console.error('Error:', data);
             } else {
                 console.log('Success:', data);
-                // Clear the form here if necessary
+                
             }
         } catch (error) {
             console.error('Network error:', error);
