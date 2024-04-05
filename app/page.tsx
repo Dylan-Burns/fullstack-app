@@ -64,7 +64,7 @@ const Page = () => {
                 console.error('Error:', data);
             } else {
                 console.log('Success:', data);
-                
+                // Clear the form here if necessary
             }
         } catch (error) {
             console.error('Network error:', error);
@@ -75,7 +75,15 @@ const Page = () => {
         <div id="container">
             <div className="form-container">
                 <form onSubmit={handleSubmit} className="flex flex-col">
-                    {/* Your existing form elements */}
+                    <label htmlFor="name">Name:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        value={name}
+                        onChange={handleNameChange}
+                        required
+                        className="text-input"
+                    />
                     <div className="webcam-container">
                         <Webcam
                             audio={false}
@@ -85,12 +93,15 @@ const Page = () => {
                             className="webcam"
                         />
                         <button type="button" onClick={capture} className="button">Capture Photo</button>
-                        {/* Button to toggle between front and back camera */}
-                        <button type="button" onClick={toggleCamera} className="toggle-camera-btn">
-                            Switch Camera
-                        </button>
+                        <button type="button" onClick={toggleCamera} className="toggle-camera-btn">Switch Camera</button>
                     </div>
-                    {/* Your existing img and submit button elements */}
+                    {imageSrc && (
+                        <div>
+                            <img src={imageSrc} alt="Captured" className="webcam-screenshot" />
+                            <p>File Size: {fileSize} bytes</p>
+                            <button type="submit" className="submit-btn">Submit</button>
+                        </div>
+                    )}
                 </form>
             </div>
         </div>
