@@ -1,16 +1,26 @@
 'use client'
 
+// Page.tsx
+// This component provides the main user interface for capturing photos,
+// toggling the camera, and submitting data.
+
+// Imports necessary React hooks, components from react-webcam, and styles.
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import Webcam from 'react-webcam';
 
+// Main functional component for the page.
 const Page = () => {
+    // Ref for the webcam component to capture screenshots.
     const webcamRef = useRef<Webcam>(null);
+
+    // State hooks for managing form data and UI state.
     const [name, setName] = useState('');
     const [imageSrc, setImageSrc] = useState('');
     const [fileSize, setFileSize] = useState<number | null>(null);
     const [facingMode, setFacingMode] = useState<"user" | "environment">("user");
     const [darkMode, setDarkMode] = useState(false);
 
+    // Effect hook to toggle the 'dark' class on the root element based on darkMode state.
     useEffect(() => {
         const className = 'dark';
         const element = window.document.documentElement;
@@ -21,6 +31,7 @@ const Page = () => {
         }
     }, [darkMode]);
 
+    // Handlers for form input, camera toggling, and photo capturing.
     const handleNameChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
     }, []);
@@ -32,7 +43,6 @@ const Page = () => {
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current?.getScreenshot();
         setImageSrc(imageSrc || '');
-
         if (imageSrc) {
             fetch(imageSrc)
                 .then((res) => res.blob())
@@ -42,6 +52,7 @@ const Page = () => {
         }
     }, [webcamRef]);
 
+    // Handler for form submission to the backend API.
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!name || fileSize === null) {
@@ -66,9 +77,10 @@ const Page = () => {
         }
     };
 
+    // Render method providing the structure of the page with form inputs,
+    // the webcam component, and the dark mode toggle switch.
     return (
         <div id="container">
-            {/* Toggle switch for dark mode */}
             <div className="switch-container">
                 <input
                     type="checkbox"
@@ -107,7 +119,6 @@ const Page = () => {
                     {imageSrc && (
                         <div>
                             <img src={imageSrc} alt="Captured" className="webcam-screenshot" />
-                            {/*<p>File Size: {fileSize} bytes</p>*/}
                             <button type="submit" className="submit-btn">Submit</button>
                         </div>
                     )}
