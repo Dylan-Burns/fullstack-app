@@ -107,7 +107,7 @@ const Page = () => {
                     {imageSrc && (
                         <div>
                             <img src={imageSrc} alt="Captured" className="webcam-screenshot" />
-                            <p>File Size: {fileSize} bytes</p>
+                            {/*<p>File Size: {fileSize} bytes</p>*/}
                             <button type="submit" className="submit-btn">Submit</button>
                         </div>
                     )}
