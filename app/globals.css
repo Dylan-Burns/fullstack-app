@@ -93,3 +93,14 @@ label {
   }
 }
 
+.toggle-camera-btn {
+  background-color: rgba(var(--foreground-rgb), 0.1); /* Slightly transparent for minimalist look */
+  color: rgb(var(--foreground-rgb));
+  margin-top: 1rem; /* Space from capture button */
+  font-weight: 500;
+}
+
+.toggle-camera-btn:hover {
+  background-color: rgba(var(--foreground-rgb), 0.2); /* Darker on hover */
+}
+
