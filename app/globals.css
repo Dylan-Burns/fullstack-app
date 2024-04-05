@@ -30,7 +30,7 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Full viewport height */
+  min-height: 100vh;
   background-color: rgb(var(--background-rgb));
 }
 
@@ -44,14 +44,15 @@ html, body {
   margin: 1rem;
 }
 
-input[type="text"],
-button {
+input[type="text"], button {
+  display: block;
   width: 100%;
   padding: 0.5rem;
   margin-top: 0.5rem;
   border-radius: var(--border-radius);
-  border: 2px solid rgba(229, 231, 235); /* Light gray border */
+  border: 2px solid rgba(229, 231, 235);
 }
+
 
 button {
   background-color: rgb(var(--accent-color-rgb));
@@ -93,8 +94,9 @@ label {
   }
 }
 
+
 .toggle-camera-btn {
-  background-color: rgba(var(--foreground-rgb), 0.1); /* Slightly transparent for minimalist look */
+  background-color: rgba(var(--foreground-rgb), 0.1); /* Slightly transparent */
   color: rgb(var(--foreground-rgb));
   margin-top: 1rem; /* Space from capture button */
   font-weight: 500;

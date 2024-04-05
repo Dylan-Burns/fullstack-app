@@ -1,6 +1,6 @@
 // pages/api/users.js
-import connectToDatabase from '../../db/mongodb'; // Changed import to default
-import { ObjectId } from 'mongodb'; // Import ObjectId for creating unique identifiers
+import connectToDatabase from '../../db/mongodb';
+import { ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
