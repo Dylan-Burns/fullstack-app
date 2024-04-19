@@ -1,24 +1,35 @@
-'use client'
+'use client';
 
-// Page.tsx
-// This component provides the main user interface for capturing photos,
-// toggling the camera, and submitting data.
+/**
+ * @file page.tsx
+ * @description This component serves as the main user interface for capturing photos, toggling the camera,
+ *              and submitting data. It utilizes React hooks for managing state and effects, and integrates
+ *              with the `react-webcam` for webcam functionalities.
+ * @version 0.0.1
+ * @author Dylan-Burns
+ * @date 04/03/2024
+ */
 
-// Imports necessary React hooks, components from react-webcam, and styles.
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import Webcam from 'react-webcam';
+import Image from 'next/image';
 
-// Main functional component for the page.
-const Page = () => {
+/**
+ * Represents the main page component where users can interact with the webcam,
+ * switch between camera modes, and submit their captured images along with some data.
+ * 
+ * @returns {JSX.Element} The rendered component with form and webcam functionalities.
+ */
+const Page: React.FC = () => {
     // Ref for the webcam component to capture screenshots.
     const webcamRef = useRef<Webcam>(null);
 
     // State hooks for managing form data and UI state.
-    const [name, setName] = useState('');
-    const [imageSrc, setImageSrc] = useState('');
+    const [name, setName] = useState<string>('');
+    const [imageSrc, setImageSrc] = useState<string>('');
     const [fileSize, setFileSize] = useState<number | null>(null);
     const [facingMode, setFacingMode] = useState<"user" | "environment">("user");
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState<boolean>(false);
 
     // Effect hook to toggle the 'dark' class on the root element based on darkMode state.
     useEffect(() => {
@@ -31,15 +42,38 @@ const Page = () => {
         }
     }, [darkMode]);
 
-    // Handlers for form input, camera toggling, and photo capturing.
+    /**
+     * Handles changes to the 'name' input field.
+     * 
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The event object associated with the input change.
+     */
     const handleNameChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
     }, []);
 
-    const toggleCamera = useCallback(() => {
-        setFacingMode(facingMode === "user" ? "environment" : "user");
-    }, [facingMode]);
+/**
+ * Toggles the camera between front and back on devices that support it.
+ * Displays an alert if the action is attempted on a desktop device.
+ */
+const toggleCamera = useCallback(() => {
+    // Check if the device is a mobile device
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (!isMobileDevice) {
+        // If it's not a mobile device, display an alert
+        alert("Switching the camera is only available on mobile devices.");
+        return; // Exit the function to prevent further execution
+    }
 
+    // Logic to switch the camera
+    setFacingMode(facingMode === "user" ? "environment" : "user");
+}, [facingMode]);
+
+
+
+    /**
+     * Captures a screenshot from the webcam.
+     */
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current?.getScreenshot();
         setImageSrc(imageSrc || '');
@@ -52,7 +86,12 @@ const Page = () => {
         }
     }, [webcamRef]);
 
-    // Handler for form submission to the backend API.
+
+    /**
+     * Handles the form submission to a backend API with the captured data.
+     * 
+     * @param {React.FormEvent<HTMLFormElement>} event - The form event triggered on submission.
+     */
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!name || fileSize === null) {
@@ -103,6 +142,7 @@ const Page = () => {
                         value={name}
                         onChange={handleNameChange}
                         required
+                        autoComplete='off'
                         className="text-input"
                     />
                     <div className="webcam-container">
@@ -118,7 +158,7 @@ const Page = () => {
                     </div>
                     {imageSrc && (
                         <div>
-                            <img src={imageSrc} alt="Captured" className="webcam-screenshot" />
+                            <Image src={imageSrc} alt="Captured" className="webcam-screenshot" />
                             <button type="submit" className="submit-btn">Submit</button>
                         </div>
                     )}

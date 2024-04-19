@@ -24,8 +24,6 @@
   --form-background-rgb: var(--dark-form-background-rgb);
 }
 
-/* ... the rest of the styles ... */
-
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255; /* White text for dark mode */
